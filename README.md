@@ -1,200 +1,199 @@
 # Pathmodel
 
-**Pathmodel** ist ein Monte-Carlo-Simulationsframework fuer Finanzmaerkte und Anlagestrategien.
+**Pathmodel** is a Monte Carlo simulation framework for financial markets and investment strategies.
 
-Es simuliert korrelierte Assetklassen ueber viele moegliche Zukunftspfade, um Investmentstrategien und
-Portfolioentwicklungen systematisch zu analysieren.
+It simulates correlated asset classes across many possible future paths to systematically analyze investment strategies
+and portfolio development.
 
 ---
 
 ## Roadmap
 
-Die Entwicklung erfolgt in **Milestones** mit klaren Deliverables.  
-Die Struktur ist direkt fuer **GitHub-Milestones und Issues** nutzbar.
+Development is organized into **milestones** with clear deliverables.
 
 ## Plan (Mermaid)
 
 ```mermaid
 timeline
     title Pathmodel Roadmap
-    Phase 1 - Fundament: M0 Projektsetup
-            : M1 Domain-Modell
-            : M2 Marktmodell
-            : M3 Marktsimulation
-    Phase 2 - Simulation Core: M4 Portfolio-Simulation
-            : M5 Monte-Carlo-Engine
-            : M6 Strategien
-            : M7 Statistik und Risiko
-    Phase 3 - Realismus und Produkt: M8 Sparplan und Entnahme
-            : M9 Erweiterte Marktmodelle
-            : M10 Analyseplattform
-            : M11 REST-API
+    Phase 1 - Foundation: M0 Project Setup
+            : M1 Domain Model
+            : M2 Market Model
+            : M3 Market Simulation
+    Phase 2 - Simulation Core: M4 Portfolio Simulation
+            : M5 Monte Carlo Engine
+            : M6 Strategies
+            : M7 Statistics and Risk
+    Phase 3 - Realism and Product: M8 Savings Plan and Withdrawals
+            : M9 Advanced Market Models
+            : M10 Analysis Platform
+            : M11 REST API
             : M12 Frontend
 ```
 
 ---
 
-## Milestone 0 - Projektsetup
+## Milestone 0 - Project Setup
 
-**Ziel:** Grundstruktur des Projekts aufsetzen.
+**Goal:** Set up the basic project structure.
 
 ### Tasks
 
-- Spring-Boot-Projekt erstellen
-- Maven-Struktur definieren
-- Package-Struktur anlegen
-- README erstellen
-- GitHub-Repository einrichten
-- CI-Pipeline (optional)
+- Create Spring Boot project
+- Define Maven structure
+- Create package structure
+- Create README
+- Set up GitHub repository
+- CI pipeline (optional)
 
 ### Deliverable
 
-Das Projekt startet erfolgreich und kann gebaut werden.
+The project starts successfully and can be built.
 
 ---
 
-## Milestone 1 - Domain-Modell
+## Milestone 1 - Domain Model
 
-**Ziel:** Finanzdomaene modellieren.
+**Goal:** Model the financial domain.
 
-### Asset-Modell
+### Asset Model
 
-- `Asset`-Interface erstellen
-- `AssetClass`-Enum erstellen
-- `BasicAsset`-Implementierung erstellen
+- Create `Asset` interface
+- Create `AssetClass` enum
+- Create `BasicAsset` implementation
 
 ### Portfolio
 
-- `Position`-Modell erstellen
-- `Portfolio`-Klasse erstellen
-- `PortfolioValue`-Berechnung implementieren
+- Create `Position` model
+- Create `Portfolio` class
+- Implement `PortfolioValue` calculation
 
 ### Market
 
-- `MarketState`-Modell erstellen
-- `AssetPrice`-Modell erstellen
+- Create `MarketState` model
+- Create `AssetPrice` model
 
 ### Simulation
 
-- `SimulationRequest` erstellen
-- `SimulationResult` erstellen
-- `PathResult` erstellen
+- Create `SimulationRequest`
+- Create `SimulationResult`
+- Create `PathResult`
 
 ### Deliverable
 
-Alle zentralen Domain-Objekte sind vorhanden.
+All core domain objects are in place.
 
 ---
 
-## Milestone 2 - Marktmodell
+## Milestone 2 - Market Model
 
-**Ziel:** Simulierte Asset-Bewegungen erzeugen.
+**Goal:** Generate simulated asset movements.
 
-### Rendite-Modell
+### Return Model
 
-- `ExpectedReturn`-Modell erstellen
-- `Volatility`-Modell erstellen
-- Umrechnung von jaehrlichen zu taeglichen Renditen implementieren
+- Create `ExpectedReturn` model
+- Create `Volatility` model
+- Implement conversion from annual to daily returns
 
-### Korrelation
+### Correlation
 
-- `CorrelationMatrix`-Klasse erstellen
-- Matrix-Validierung implementieren
+- Create `CorrelationMatrix` class
+- Implement matrix validation
 
-### Zufallszahlen
+### Random Numbers
 
-- Gaussschen Zufallszahlengenerator implementieren
-- Korrelierte Zufallszahlen erzeugen
+- Implement Gaussian random number generator
+- Generate correlated random numbers
 
-### Mathematik
+### Mathematics
 
-- Cholesky-Zerlegung implementieren
-- Matrix-Multiplikation implementieren
+- Implement Cholesky decomposition
+- Implement matrix multiplication
 
 ### Deliverable
 
-Korrelierte taegliche Renditen koennen erzeugt werden.
+Correlated daily returns can be generated.
 
 ---
 
-## Milestone 3 - Marktsimulation
+## Milestone 3 - Market Simulation
 
-**Ziel:** Markt ueber die Zeit simulieren.
+**Goal:** Simulate the market over time.
 
 ### Tasks
 
-- `MarketSimulator`-Interface erstellen
-- `GeometricBrownianMotion` implementieren
-- Asset-Preise aktualisieren
-- Datum fortschreiben
-- `InitialMarketState`-Generator erstellen
+- Create `MarketSimulator` interface
+- Implement `GeometricBrownianMotion`
+- Update asset prices
+- Advance date
+- Create `InitialMarketState` generator
 
 ### Deliverable
 
-Der Markt kann ueber viele Tage simuliert werden.
+The market can be simulated over many days.
 
 ---
 
-## Milestone 4 - Portfolio-Simulation
+## Milestone 4 - Portfolio Simulation
 
-**Ziel:** Portfolioentwicklung berechnen.
+**Goal:** Calculate portfolio development.
 
-### Portfolio-Initialisierung
+### Portfolio Initialization
 
-- Initialkapital definieren
-- Asset-Gewichtung festlegen
+- Define initial capital
+- Set asset allocation
 
-### Portfolio-Update
+### Portfolio Update
 
-- `PortfolioValue`-Berechnung implementieren
-- Asset-Preise anwenden
+- Implement `PortfolioValue` calculation
+- Apply asset prices
 
 ### SimulationContext
 
-- `SimulationDay` modellieren
-- `PathIndex` modellieren
+- Model `SimulationDay`
+- Model `PathIndex`
 
 ### Deliverable
 
-Das Portfolio folgt der Marktentwicklung.
+The portfolio follows market development.
 
 ---
 
-## Milestone 5 - Monte-Carlo-Engine
+## Milestone 5 - Monte Carlo Engine
 
-**Ziel:** Viele Marktpfade simulieren.
+**Goal:** Simulate many market paths.
 
 ### SimulationEngine
 
-- `runSinglePath` implementieren
-- `runMultiplePaths` implementieren
+- Implement `runSinglePath`
+- Implement `runMultiplePaths`
 
-### Parallelisierung
+### Parallelization
 
-- ThreadPool integrieren
-- Parallel Streams evaluieren
+- Integrate thread pool
+- Evaluate parallel streams
 
-### Statistik
+### Statistics
 
-- Mean berechnen
-- Median berechnen
-- Min/Max berechnen
+- Calculate mean
+- Calculate median
+- Calculate min/max
 
 ### Deliverable
 
-Die Monte-Carlo-Simulation funktioniert stabil.
+The Monte Carlo simulation works reliably.
 
 ---
 
-## Milestone 6 - Strategien
+## Milestone 6 - Strategies
 
-**Ziel:** Verschiedene Investmentstrategien simulieren.
+**Goal:** Simulate different investment strategies.
 
-### Strategy-Interface
+### Strategy Interface
 
-- `InvestmentStrategy`-Interface definieren
+- Define `InvestmentStrategy` interface
 
-### Strategien implementieren
+### Implement Strategies
 
 - `BuyAndHoldStrategy`
 - `PeriodicRebalanceStrategy`
@@ -202,118 +201,118 @@ Die Monte-Carlo-Simulation funktioniert stabil.
 
 ### Rebalancing
 
-- Portfolio-Reweighting implementieren
-- Transaktionsmodell integrieren
+- Implement portfolio reweighting
+- Integrate transaction model
 
 ### Deliverable
 
-Strategien koennen simuliert und verglichen werden.
+Strategies can be simulated and compared.
 
 ---
 
-## Milestone 7 - Statistik und Risiko
+## Milestone 7 - Statistics and Risk
 
-**Ziel:** Portfolioanalysen berechnen.
+**Goal:** Calculate portfolio analytics.
 
-### Performance-Kennzahlen
+### Performance Metrics
 
 - Annual Return
 - Volatility
 - Sharpe Ratio
 
-### Risiko-Kennzahlen
+### Risk Metrics
 
 - Max Drawdown
 - Worst Case
 - Value at Risk
 
-### Simulation-Auswertung
+### Simulation Evaluation
 
-- Erfolgswahrscheinlichkeit berechnen
-- Verteilungsanalyse durchfuehren
+- Calculate probability of success
+- Perform distribution analysis
 
 ### Deliverable
 
-Die Simulation liefert aussagekraeftige Kennzahlen.
+The simulation provides meaningful metrics.
 
 ---
 
-## Milestone 8 - Sparplan und Entnahme
+## Milestone 8 - Savings Plan and Withdrawals
 
-**Ziel:** Realistische Lebenssituationen simulieren.
+**Goal:** Simulate realistic life scenarios.
 
 ### Savings
 
-- Monthly Contribution modellieren
-- Einkommenswachstumsmodell integrieren
+- Model monthly contributions
+- Integrate income growth model
 
 ### Withdrawals
 
-- Fixed-Withdrawal-Modell integrieren
-- Percentage-Withdrawal-Modell integrieren
+- Integrate fixed withdrawal model
+- Integrate percentage withdrawal model
 
 ### Inflation
 
-- Inflationsmodell integrieren
+- Integrate inflation model
 
 ### Deliverable
 
-Langfristige Vermoegensentwicklung kann realistisch simuliert werden.
+Long-term wealth development can be simulated realistically.
 
 ---
 
-## Milestone 9 - Erweiterte Marktmodelle
+## Milestone 9 - Advanced Market Models
 
-**Ziel:** Realistischere Marktsimulation ermoeglichen.
+**Goal:** Enable more realistic market simulation.
 
-### Alternative Modelle
+### Alternative Models
 
-- Historical Bootstrapping
-- Mean-Reversion-Modell
+- Historical bootstrapping
+- Mean reversion model
 
-### Crash-Simulation
+### Crash Simulation
 
-- Market-Shock-Modell
-- Jump-Diffusion-Modell
+- Market shock model
+- Jump diffusion model
 
-### Marktregime
+### Market Regimes
 
-- Bull Market
-- Bear Market
+- Bull market
+- Bear market
 
 ### Deliverable
 
-Mehrere Marktmodelle koennen verwendet werden.
+Multiple market models can be used.
 
 ---
 
-## Milestone 10 - Analyseplattform
+## Milestone 10 - Analysis Platform
 
-**Ziel:** Strategien systematisch analysieren.
+**Goal:** Analyze strategies systematically.
 
-### Batch-Simulation
+### Batch Simulation
 
-- Strategy Comparison
-- Parameter Sweep
+- Strategy comparison
+- Parameter sweep
 
-### Optimierung
+### Optimization
 
-- Asset-Allocation-Search
-- Efficient-Frontier-Simulation
+- Asset allocation search
+- Efficient frontier simulation
 
 ### Deliverable
 
-Strategien koennen automatisch analysiert und optimiert werden.
+Strategies can be analyzed and optimized automatically.
 
 ---
 
-## Milestone 11 - REST-API
+## Milestone 11 - REST API
 
-**Ziel:** Simulationen extern starten.
+**Goal:** Run simulations externally.
 
 ### Controller
 
-- `SimulationController` implementieren
+- Implement `SimulationController`
 
 ### Endpoints
 
@@ -327,29 +326,29 @@ Strategien koennen automatisch analysiert und optimiert werden.
 
 ### Deliverable
 
-Simulationen koennen ueber die REST-API gesteuert werden.
+Simulations can be controlled via the REST API.
 
 ---
 
 ## Milestone 12 - Frontend
 
-**Ziel:** Simulationsergebnisse visualisieren.
+**Goal:** Visualize simulation results.
 
 ### Dashboard
 
-- Simulation starten
-- Ergebnisse anzeigen
+- Start simulation
+- Display results
 
 ### Charts
 
-- Portfolio-Pfade
-- Histogramme
+- Portfolio paths
+- Histograms
 
-### Technologien
+### Technologies
 
-- Angular oder React
+- Angular or React
 - Chart.js
 
 ### Deliverable
 
-Interaktive Analyseplattform.
+Interactive analysis platform.
