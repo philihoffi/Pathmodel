@@ -32,5 +32,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      - name: Checkstyle
+        run: mvn -B checkstyle:check
       - name: Build with Maven Wrapper
         run: mvn -B package
