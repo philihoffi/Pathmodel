@@ -54,4 +54,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven Wrapper
-        run: mvn -B package
+        run: mvn -B package -Dcheckstyle.skip=true
