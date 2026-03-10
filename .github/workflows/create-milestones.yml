@@ -1,0 +1,57 @@
+name: Create GitHub Milestones
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '.github/workflows/create-milestones.yml'
+
+jobs:
+  create-milestones:
+    name: Create Milestones
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Create milestones
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const milestones = [
+              { title: 'M0 Project Setup' },
+              { title: 'M1 Domain Model' },
+              { title: 'M2 Market Model' },
+              { title: 'M3 Market Simulation' },
+              { title: 'M4 Portfolio Simulation' },
+              { title: 'M5 Monte Carlo Engine' },
+              { title: 'M6 Strategies' },
+              { title: 'M7 Statistics and Risk' },
+              { title: 'M8 Savings Plan and Withdrawals' },
+              { title: 'M9 Advanced Market Models' },
+              { title: 'M10 Analysis Platform' },
+              { title: 'M11 REST API' },
+              { title: 'M12 Frontend' },
+            ];
+
+            const existing = await github.paginate(github.rest.issues.listMilestones, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              per_page: 100,
+            });
+            const existingTitles = new Set(existing.map(m => m.title));
+
+            for (const ms of milestones) {
+              if (existingTitles.has(ms.title)) {
+                core.info(`Milestone already exists, skipping: ${ms.title}`);
+              } else {
+                await github.rest.issues.createMilestone({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: ms.title,
+                });
+                core.info(`Created milestone: ${ms.title}`);
+              }
+            }
