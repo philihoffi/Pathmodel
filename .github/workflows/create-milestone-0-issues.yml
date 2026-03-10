@@ -1,0 +1,132 @@
+name: Create Milestone 0 Issues with Labels
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  create-milestone-0:
+    name: Create Milestone 0 Issues
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create Labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = [
+              { name: 'milestone-0', color: '0075ca', description: 'Milestone 0 - Project Setup' },
+              { name: 'setup',       color: 'e4e669', description: 'Project setup and configuration' },
+              { name: 'ci/cd',       color: 'd93f0b', description: 'Continuous integration and delivery' },
+            ];
+
+            for (const label of labels) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: label.name,
+                  color: label.color,
+                  description: label.description,
+                });
+                console.log(`Created label: ${label.name}`);
+              } catch (err) {
+                if (err.status === 422) {
+                  console.log(`Label already exists: ${label.name}`);
+                } else {
+                  throw err;
+                }
+              }
+            }
+
+      - name: Create Milestone 0
+        id: create-milestone
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const milestones = await github.rest.issues.listMilestones({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+            });
+
+            const existing = milestones.data.find(m => m.title === 'Milestone 0 - Project Setup');
+            if (existing) {
+              console.log(`Milestone already exists: ${existing.title} (#${existing.number})`);
+              core.setOutput('milestone_number', existing.number);
+            } else {
+              const milestone = await github.rest.issues.createMilestone({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: 'Milestone 0 - Project Setup',
+                description: 'Set up the basic project structure. Deliverable: The project starts successfully and can be built.',
+              });
+              console.log(`Created milestone: ${milestone.data.title} (#${milestone.data.number})`);
+              core.setOutput('milestone_number', milestone.data.number);
+            }
+
+      - name: Create Issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const milestoneNumber = parseInt('${{ steps.create-milestone.outputs.milestone_number }}');
+
+            const issues = [
+              {
+                title: 'Create Spring Boot project',
+                body: 'Set up the initial Spring Boot project as part of **Milestone 0 - Project Setup**.\n\n**Goal:** Create the base Spring Boot application that can be started and built successfully.',
+                labels: ['milestone-0', 'setup'],
+              },
+              {
+                title: 'Define Maven structure',
+                body: 'Define and document the Maven project structure as part of **Milestone 0 - Project Setup**.\n\n**Goal:** Ensure the Maven build configuration (`pom.xml`) is properly structured with the correct dependencies and plugins.',
+                labels: ['milestone-0', 'setup'],
+              },
+              {
+                title: 'Create package structure',
+                body: 'Create the Java package structure as part of **Milestone 0 - Project Setup**.\n\n**Goal:** Define a clean, layered package structure that reflects the domain and application layers.',
+                labels: ['milestone-0', 'setup'],
+              },
+              {
+                title: 'Create README',
+                body: 'Write the project README as part of **Milestone 0 - Project Setup**.\n\n**Goal:** Provide an overview of the project, its goals, roadmap, and setup instructions.',
+                labels: ['milestone-0', 'setup'],
+              },
+              {
+                title: 'Set up GitHub repository',
+                body: 'Configure the GitHub repository settings as part of **Milestone 0 - Project Setup**.\n\n**Goal:** Set up branch protection, labels, milestones, and other repository settings.',
+                labels: ['milestone-0', 'setup'],
+              },
+              {
+                title: 'CI pipeline (optional)',
+                body: 'Set up a continuous integration pipeline as part of **Milestone 0 - Project Setup**.\n\n**Goal:** Configure GitHub Actions to automatically build and test the project on every push and pull request.',
+                labels: ['milestone-0', 'ci/cd'],
+              },
+            ];
+
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              milestone: milestoneNumber,
+            });
+            const existingTitles = new Set(existing.data.map(i => i.title));
+
+            for (const issue of issues) {
+              if (existingTitles.has(issue.title)) {
+                console.log(`Issue already exists: ${issue.title}`);
+                continue;
+              }
+
+              const created = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issue.title,
+                body: issue.body,
+                labels: issue.labels,
+                milestone: milestoneNumber,
+              });
+              console.log(`Created issue #${created.data.number}: ${issue.title}`);
+            }
