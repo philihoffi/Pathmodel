@@ -7,6 +7,85 @@ and portfolio development.
 
 ---
 
+## Tech Stack
+
+| Technology  | Version | Purpose                       |
+|-------------|---------|-------------------------------|
+| Java        | 17      | Programming language          |
+| Spring Boot | 4.0.3   | Application framework         |
+| Maven       | 3.9+    | Build tool (wrapper included) |
+| JUnit 5     | —       | Testing framework             |
+| Checkstyle  | —       | Code style enforcement        |
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- **JDK 17+** installed and on your `PATH`
+- **Git** for version control
+
+### Build & Run
+
+```bash
+cd PathmodelBackend
+
+# Build (compile + test + package)
+./mvnw clean install          # Linux / macOS
+mvnw.cmd clean install        # Windows
+
+# Run the application
+./mvnw spring-boot:run
+```
+
+### Run Tests
+
+```bash
+./mvnw test
+```
+
+### Run Checkstyle
+
+```bash
+./mvnw checkstyle:check
+```
+
+> No Maven installation required — the project includes a Maven Wrapper (`mvnw` / `mvnw.cmd`).
+
+---
+
+## CI Pipeline
+
+The project uses a CI pipeline to validate every push and pull request:
+
+| Step       | Command                | Purpose                        |
+|------------|------------------------|--------------------------------|
+| Compile    | `mvn compile`          | Verify code compiles           |
+| Test       | `mvn test`             | Run all unit tests             |
+| Checkstyle | `mvn checkstyle:check` | Enforce coding conventions     |
+| Package    | `mvn package`          | Build the application artifact |
+
+You can replicate the full CI pipeline locally with:
+
+```bash
+cd PathmodelBackend
+./mvnw clean verify
+```
+
+---
+
+## Contributing
+
+We welcome contributions! Please read the **[Contributing Guide](CONTRIBUTING.md)** for:
+
+- Code style and conventions
+- How to build and test
+- Commit message format
+- Branch workflow and PR process
+
+---
+
 ## Roadmap
 
 Development is organized into **milestones** with clear deliverables.
