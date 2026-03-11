@@ -118,12 +118,11 @@ timeline
 
 ### Tasks
 
-- Create Spring Boot project
-- Define Maven structure
-- Create package structure
-- Create README
-- Set up GitHub repository
-- CI pipeline (optional)
+- Initialize the project with build tool and framework
+- Define project structure and package layout
+- Set up version control and repository
+- Add documentation and contribution guidelines
+- Configure CI pipeline
 
 ### Deliverable
 
@@ -135,28 +134,12 @@ The project starts successfully and can be built.
 
 **Goal:** Model the financial domain.
 
-### Asset Model
+### Tasks
 
-- Create `Asset` interface
-- Create `AssetClass` enum
-- Create `BasicAsset` implementation
-
-### Portfolio
-
-- Create `Position` model
-- Create `Portfolio` class
-- Implement `PortfolioValue` calculation
-
-### Market
-
-- Create `MarketState` model
-- Create `AssetPrice` model
-
-### Simulation
-
-- Create `SimulationRequest`
-- Create `SimulationResult`
-- Create `PathResult`
+- Define asset types and classifications
+- Model portfolios and positions
+- Model market state and asset prices
+- Define simulation input and output structures
 
 ### Deliverable
 
@@ -168,26 +151,13 @@ All core domain objects are in place.
 
 **Goal:** Generate simulated asset movements.
 
-### Return Model
+### Tasks
 
-- Create `ExpectedReturn` model
-- Create `Volatility` model
-- Implement conversion from annual to daily returns
-
-### Correlation
-
-- Create `CorrelationMatrix` class
-- Implement matrix validation
-
-### Random Numbers
-
-- Implement Gaussian random number generator
+- Model expected returns and volatility
+- Support conversion between time horizons (annual ↔ daily)
+- Model correlations between asset classes
 - Generate correlated random numbers
-
-### Mathematics
-
-- Implement Cholesky decomposition
-- Implement matrix multiplication
+- Implement required linear algebra operations
 
 ### Deliverable
 
@@ -201,11 +171,10 @@ Correlated daily returns can be generated.
 
 ### Tasks
 
-- Create `MarketSimulator` interface
-- Implement `GeometricBrownianMotion`
-- Update asset prices
-- Advance date
-- Create `InitialMarketState` generator
+- Define a market simulation abstraction
+- Implement a stochastic price model (e.g. Geometric Brownian Motion)
+- Simulate price evolution over multiple time steps
+- Generate initial market conditions
 
 ### Deliverable
 
@@ -217,20 +186,11 @@ The market can be simulated over many days.
 
 **Goal:** Calculate portfolio development.
 
-### Portfolio Initialization
+### Tasks
 
-- Define initial capital
-- Set asset allocation
-
-### Portfolio Update
-
-- Implement `PortfolioValue` calculation
-- Apply asset prices
-
-### SimulationContext
-
-- Model `SimulationDay`
-- Model `PathIndex`
+- Initialize a portfolio with capital and allocation
+- Update portfolio value based on market movements
+- Track simulation progress over time
 
 ### Deliverable
 
@@ -242,21 +202,11 @@ The portfolio follows market development.
 
 **Goal:** Simulate many market paths.
 
-### SimulationEngine
+### Tasks
 
-- Implement `runSinglePath`
-- Implement `runMultiplePaths`
-
-### Parallelization
-
-- Integrate thread pool
-- Evaluate parallel streams
-
-### Statistics
-
-- Calculate mean
-- Calculate median
-- Calculate min/max
+- Run single and multiple simulation paths
+- Parallelize path computation for performance
+- Aggregate basic statistics across paths (mean, median, min/max)
 
 ### Deliverable
 
@@ -268,20 +218,11 @@ The Monte Carlo simulation works reliably.
 
 **Goal:** Simulate different investment strategies.
 
-### Strategy Interface
+### Tasks
 
-- Define `InvestmentStrategy` interface
-
-### Implement Strategies
-
-- `BuyAndHoldStrategy`
-- `PeriodicRebalanceStrategy`
-- `StaticAllocationStrategy`
-
-### Rebalancing
-
-- Implement portfolio reweighting
-- Integrate transaction model
+- Define a strategy abstraction
+- Implement common strategies (buy-and-hold, rebalancing, static allocation)
+- Support portfolio reweighting and transaction modeling
 
 ### Deliverable
 
@@ -293,22 +234,11 @@ Strategies can be simulated and compared.
 
 **Goal:** Calculate portfolio analytics.
 
-### Performance Metrics
+### Tasks
 
-- Annual Return
-- Volatility
-- Sharpe Ratio
-
-### Risk Metrics
-
-- Max Drawdown
-- Worst Case
-- Value at Risk
-
-### Simulation Evaluation
-
-- Calculate probability of success
-- Perform distribution analysis
+- Compute performance metrics (return, volatility, Sharpe ratio)
+- Compute risk metrics (max drawdown, worst case, Value at Risk)
+- Evaluate simulation outcomes (success probability, distribution analysis)
 
 ### Deliverable
 
@@ -320,19 +250,11 @@ The simulation provides meaningful metrics.
 
 **Goal:** Simulate realistic life scenarios.
 
-### Savings
+### Tasks
 
-- Model monthly contributions
-- Integrate income growth model
-
-### Withdrawals
-
-- Integrate fixed withdrawal model
-- Integrate percentage withdrawal model
-
-### Inflation
-
-- Integrate inflation model
+- Model periodic contributions with optional growth
+- Model withdrawal strategies (fixed, percentage-based)
+- Incorporate inflation adjustments
 
 ### Deliverable
 
@@ -344,20 +266,11 @@ Long-term wealth development can be simulated realistically.
 
 **Goal:** Enable more realistic market simulation.
 
-### Alternative Models
+### Tasks
 
-- Historical bootstrapping
-- Mean reversion model
-
-### Crash Simulation
-
-- Market shock model
-- Jump diffusion model
-
-### Market Regimes
-
-- Bull market
-- Bear market
+- Support alternative return models (historical bootstrapping, mean reversion)
+- Simulate market shocks and crash scenarios
+- Model market regime changes (bull / bear phases)
 
 ### Deliverable
 
@@ -369,15 +282,11 @@ Multiple market models can be used.
 
 **Goal:** Analyze strategies systematically.
 
-### Batch Simulation
+### Tasks
 
-- Strategy comparison
-- Parameter sweep
-
-### Optimization
-
-- Asset allocation search
-- Efficient frontier simulation
+- Compare strategies across batch simulations
+- Support parameter sweeps and sensitivity analysis
+- Optimize asset allocation and approximate the efficient frontier
 
 ### Deliverable
 
@@ -389,19 +298,11 @@ Strategies can be analyzed and optimized automatically.
 
 **Goal:** Run simulations externally.
 
-### Controller
+### Tasks
 
-- Implement `SimulationController`
-
-### Endpoints
-
-- `POST /simulations`
-- `GET /simulations/{id}`
-
-### DTOs
-
-- `SimulationRequestDTO`
-- `SimulationResultDTO`
+- Expose endpoints to start and retrieve simulations
+- Define request and response data transfer objects
+- Validate input and handle errors
 
 ### Deliverable
 
@@ -413,20 +314,11 @@ Simulations can be controlled via the REST API.
 
 **Goal:** Visualize simulation results.
 
-### Dashboard
+### Tasks
 
-- Start simulation
-- Display results
-
-### Charts
-
-- Portfolio paths
-- Histograms
-
-### Technologies
-
-- Angular or React
-- Chart.js
+- Build a dashboard to start simulations and display results
+- Visualize portfolio paths and result distributions
+- Choose and integrate a frontend framework and charting library
 
 ### Deliverable
 
