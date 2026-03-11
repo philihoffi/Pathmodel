@@ -25,10 +25,10 @@ jobs:
         working-directory: PathmodelBackend
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '25'
           distribution: 'temurin'
           cache: maven
       - name: Run Checkstyle
@@ -44,10 +44,10 @@ jobs:
         working-directory: PathmodelBackend
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '25'
           distribution: 'temurin'
           cache: maven
       - name: Compile
@@ -55,7 +55,7 @@ jobs:
 
   # ── 3. Test ────────────────────────────────────────────────────
   test:
-    name: Test
+    name: Test + Coverage
     needs: compile
     runs-on: ubuntu-latest
     defaults:
@@ -63,20 +63,30 @@ jobs:
         working-directory: PathmodelBackend
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '25'
           distribution: 'temurin'
           cache: maven
-      - name: Run Tests
-        run: mvn -B test -Dcheckstyle.skip=true
+
+      - name: Run Tests and Coverage
+        run: mvn -B verify -Dcheckstyle.skip=true
+
       - name: Upload Test Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
           path: PathmodelBackend/target/surefire-reports/
+          retention-days: 30
+
+      - name: Upload Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: PathmodelBackend/target/site/jacoco/
           retention-days: 30
 
   # ── 4. Javadoc ──────────────────────────────────────────────────
@@ -89,10 +99,10 @@ jobs:
         working-directory: PathmodelBackend
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '25'
           distribution: 'temurin'
           cache: maven
       - name: Generate Javadoc
@@ -114,10 +124,10 @@ jobs:
         working-directory: PathmodelBackend
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '25'
           distribution: 'temurin'
           cache: maven
       - name: Package

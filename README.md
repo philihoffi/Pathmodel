@@ -11,7 +11,7 @@ and portfolio development.
 
 | Technology  | Version | Purpose                       |
 |-------------|---------|-------------------------------|
-| Java        | 17      | Programming language          |
+| Java        | 25      | Programming language          |
 | Spring Boot | 4.0.3   | Application framework         |
 | Maven       | 3.9+    | Build tool (wrapper included) |
 | JUnit 5     | —       | Testing framework             |
@@ -23,7 +23,7 @@ and portfolio development.
 
 ### Prerequisites
 
-- **JDK 17+** installed and on your `PATH`
+- **JDK 25+** installed and on your `PATH`
 - **Git** for version control
 
 ### Build & Run
