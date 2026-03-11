@@ -23,7 +23,7 @@ Thank you for your interest in contributing to **Pathmodel**! This guide will he
 
 | Tool       | Version | Notes                              |
 |------------|---------|------------------------------------|
-| Java (JDK) | 17+     | Required by Maven and Spring Boot  |
+| Java (JDK) | 25+     | Required by Maven and Spring Boot  |
 | Maven      | 3.9+    | Or use the included `mvnw` wrapper |
 | Git        | 2.x+    | Version control                    |
 
