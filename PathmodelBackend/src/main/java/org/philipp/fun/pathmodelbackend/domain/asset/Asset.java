@@ -1,4 +1,4 @@
-package org.philipp.fun.pathmodelbackend.domain.asset.assetTypes;
+package org.philipp.fun.pathmodelbackend.domain.asset;
 
 /**
  * Sealed interface for all financial assets.

@@ -1,7 +1,6 @@
 package org.philipp.fun.pathmodelbackend.domain.asset;
 
 import org.junit.jupiter.api.Test;
-import org.philipp.fun.pathmodelbackend.domain.asset.assetTypes.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

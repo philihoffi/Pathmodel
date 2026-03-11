@@ -1,20 +1,21 @@
-package org.philipp.fun.pathmodelbackend.domain.asset.assetTypes;
+package org.philipp.fun.pathmodelbackend.domain.asset;
 
 /**
- * A commodity asset (e.g. Gold, Commodity Index).
+ * An ETF asset (e.g. MSCI World, S&amp;P 500, MSCI EM).
  *
  * @param symbol         the ticker symbol
  * @param name           the display name
  * @param expectedReturn the annualized expected return
  * @param volatility     the annualized volatility
- * @param storageCost    the annualized storage cost ratio (0 for paper assets)
+ * @param dividendYield  the annualized dividend yield
+ * @param ter            the total expense ratio
  */
-public record CommodityAsset(
+public record EtfAsset(
         String symbol,
         String name,
         double expectedReturn,
         double volatility,
-        double storageCost
+        double dividendYield,
+        double ter
 ) implements Asset {
 }
-

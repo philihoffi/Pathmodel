@@ -1,4 +1,4 @@
-package org.philipp.fun.pathmodelbackend.domain.asset.assetTypes;
+package org.philipp.fun.pathmodelbackend.domain.asset;
 
 /**
  * A cash or money market asset (e.g. Money Market Fund).
