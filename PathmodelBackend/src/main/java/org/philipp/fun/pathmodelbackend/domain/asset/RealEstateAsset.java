@@ -1,4 +1,4 @@
-package org.philipp.fun.pathmodelbackend.domain.asset.assetTypes;
+package org.philipp.fun.pathmodelbackend.domain.asset;
 
 /**
  * A real estate asset (e.g. REIT Index).
