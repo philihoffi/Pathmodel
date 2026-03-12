@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: javadoc
-          path: PathmodelBackend/target/site/apidocs/
+          path: PathmodelBackend/target/reports/apidocs/
           retention-days: 30
 
   package:
