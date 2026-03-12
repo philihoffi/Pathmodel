@@ -6,6 +6,7 @@ import org.philipp.fun.pathmodelbackend.domain.asset.EtfAsset;
 import org.philipp.fun.pathmodelbackend.domain.simulation.state.PortfolioPosition;
 import org.philipp.fun.pathmodelbackend.domain.simulation.state.PortfolioState;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SimulationRequestTest {
+
+    private static final LocalDate PURCHASE_DATE = LocalDate.of(2026, 1, 1);
 
     private static Asset asset() {
         return new EtfAsset(
@@ -23,7 +26,7 @@ class SimulationRequestTest {
     private static PortfolioState portfolioState() {
         return new PortfolioState(
                 "Core",
-                List.of(new PortfolioPosition(asset(), 2.0)));
+                List.of(new PortfolioPosition(asset(), PURCHASE_DATE, 2.0)));
     }
 
     @Test

@@ -5,6 +5,7 @@ import org.philipp.fun.pathmodelbackend.domain.asset.Asset;
 import org.philipp.fun.pathmodelbackend.domain.asset.CashAsset;
 import org.philipp.fun.pathmodelbackend.domain.asset.EtfAsset;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PortfolioStateTest {
 
+    private static final LocalDate PURCHASE_DATE = LocalDate.of(2026, 1, 1);
+
     private static Asset asset() {
         return new EtfAsset(
                 "MXWO", "MSCI World",
@@ -21,12 +24,12 @@ class PortfolioStateTest {
     }
 
     private static PortfolioPosition position() {
-        return new PortfolioPosition(asset(), 2.0);
+        return new PortfolioPosition(asset(), PURCHASE_DATE, 2.0);
     }
 
     @Test
     void constructorCopiesPositionsDefensively() {
-        PortfolioPosition position = new PortfolioPosition(asset(), 2.0);
+        PortfolioPosition position = new PortfolioPosition(asset(), PURCHASE_DATE, 2.0);
         List<PortfolioPosition> positions = new ArrayList<>();
         positions.add(position);
 
@@ -78,8 +81,8 @@ class PortfolioStateTest {
         PortfolioState portfolioState = new PortfolioState(
                 "Core",
                 List.of(
-                        new PortfolioPosition(equity, 2.0),
-                        new PortfolioPosition(cash, 10.0)
+                        new PortfolioPosition(equity, PURCHASE_DATE, 2.0),
+                        new PortfolioPosition(cash, PURCHASE_DATE, 10.0)
                 ));
         MarketState marketState = new MarketState(Map.of(
                 equity, 100.0,
@@ -100,11 +103,27 @@ class PortfolioStateTest {
         Asset equity = asset();
         PortfolioState portfolioState = new PortfolioState(
                 "Core",
-                List.of(new PortfolioPosition(equity, 2.0)));
+                List.of(new PortfolioPosition(equity, PURCHASE_DATE, 2.0)));
         MarketState marketState = new MarketState(Map.of(
                 new CashAsset("CASH", "Cash", 0.02), 1.0));
 
         assertThrows(IllegalArgumentException.class,
                 () -> portfolioState.totalValue(marketState));
+    }
+
+    @Test
+    void getAllPositionsOfAssetTypeReturnsMatchingPositionsOnly() {
+        Asset equity = asset();
+        Asset cash = new CashAsset("CASH", "Cash", 0.02);
+        PortfolioPosition firstEquity = new PortfolioPosition(equity, PURCHASE_DATE, 2.0);
+        PortfolioPosition cashPosition = new PortfolioPosition(cash, PURCHASE_DATE, 10.0);
+        PortfolioPosition secondEquity = new PortfolioPosition(equity, PURCHASE_DATE.plusDays(1), 1.5);
+        PortfolioState portfolioState = new PortfolioState(
+                "Core",
+                List.of(firstEquity, cashPosition, secondEquity));
+
+        List<PortfolioPosition> positions = portfolioState.getAllPositionsOfAssetType(equity);
+
+        assertEquals(List.of(firstEquity, secondEquity), positions);
     }
 }

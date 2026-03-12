@@ -1,5 +1,7 @@
 package org.philipp.fun.pathmodelbackend.domain.simulation.state;
 
+import org.philipp.fun.pathmodelbackend.domain.asset.Asset;
+
 import java.util.List;
 
 /**
@@ -61,5 +63,15 @@ public record PortfolioState(
                 .mapToDouble(p -> p.quantity()
                         * marketState.getPrice(p.asset()))
                 .sum();
+    }
+
+    /**
+     * Retrieves all portfolio positions of a specified asset type.
+     *
+     * @param asset the financial asset for which positions are to be retrieved
+     * @return a list of portfolio positions associated with the given asset
+     */
+    public List<PortfolioPosition> getAllPositionsOfAssetType(final Asset asset) {
+        return positions.stream().filter(p -> p.asset().equals(asset)).toList();
     }
 }
