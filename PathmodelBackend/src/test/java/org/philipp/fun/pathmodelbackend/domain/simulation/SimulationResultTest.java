@@ -24,7 +24,7 @@ class SimulationResultTest {
                 0.07, 0.15, 0.02, 0.002);
         PortfolioState portfolioState = new PortfolioState(
                 "Core",
-                List.of(new PortfolioPosition(asset, 3.0)));
+                List.of(new PortfolioPosition(asset, LocalDate.of(2026, 1, 1), 3.0)));
         MarketState marketState = new MarketState(Map.of(asset, 100.0));
         SimulationState simulationState = new SimulationState(
                 portfolioState,

@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SimulationStateTest {
 
+    private static final LocalDate PURCHASE_DATE = LocalDate.of(2026, 1, 1);
+
     private static Asset asset() {
         return new EtfAsset(
                 "MXWO", "MSCI World",
@@ -21,7 +23,7 @@ class SimulationStateTest {
     private static PortfolioState portfolioState() {
         return new PortfolioState(
                 "Core",
-                List.of(new PortfolioPosition(asset(), 2.0)));
+                List.of(new PortfolioPosition(asset(), PURCHASE_DATE, 2.0)));
     }
 
     private static MarketState marketState() {
